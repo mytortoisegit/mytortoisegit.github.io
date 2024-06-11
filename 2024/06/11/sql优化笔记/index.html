@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>sql优化笔记 | 小小的过客</title><meta name="author" content="陈先生"><meta name="copyright" content="陈先生"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SQL优化是提高数据库查询效率、减少查询时间和资源消耗的关键，以下是一些常见的SQL优化方式： 1.索引优化1）使用适当的索引：在查询频繁的列上创建索引，如主键、外键、经常出现在WHERE子句和连接条件中的列。  1234567891011121314151617-- 1 在where子句列上用索引-- 假设有一个名为users的表，并在last_name列上创建索引CREATE INDEX id">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql优化笔记">
+<meta property="og:url" content="https://mytortoisegit.github.io/2024/06/11/sql%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="小小的过客">
+<meta property="og:description" content="SQL优化是提高数据库查询效率、减少查询时间和资源消耗的关键，以下是一些常见的SQL优化方式： 1.索引优化1）使用适当的索引：在查询频繁的列上创建索引，如主键、外键、经常出现在WHERE子句和连接条件中的列。  1234567891011121314151617-- 1 在where子句列上用索引-- 假设有一个名为users的表，并在last_name列上创建索引CREATE INDEX id">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-06-11T04:26:36.000Z">
+<meta property="article:modified_time" content="2024-06-11T11:21:02.267Z">
+<meta property="article:author" content="陈先生">
+<meta property="article:tag" content="sql优化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mytortoisegit.github.io/2024/06/11/sql%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.14.0-b3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = false
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'sql优化笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-11 19:21:02'
+}</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="小小的过客"><span class="site-name">小小的过客</span></a></span><div id="menus"><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">sql优化笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-11T04:26:36.000Z" title="发表于 2024-06-11 12:26:36">2024-06-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-11T11:21:02.267Z" title="更新于 2024-06-11 19:21:02">2024-06-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="sql优化笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>SQL优化是提高数据库查询效率、减少查询时间和资源消耗的关键，以下是一些常见的SQL优化方式：</p>
+<h5 id="1-索引优化"><a href="#1-索引优化" class="headerlink" title="1.索引优化"></a><strong>1.索引优化</strong></h5><p><strong>1）使用适当的索引</strong>：在查询频繁的列上创建索引，如主键、外键、经常出现在<code>WHERE</code>子句和连接条件中的列。 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 1 在where子句列上用索引</span></span><br><span class="line"><span class="comment">-- 假设有一个名为users的表，并在last_name列上创建索引</span></span><br><span class="line"><span class="keyword">CREATE</span> INDEX idx_users_lastname <span class="keyword">ON</span> users(last_name);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 我们查询用户的姓氏为&quot;Smith&quot;的记录，可以编写如下SQL语句</span></span><br><span class="line"><span class="comment">-- 这条查询会利用idx_users_lastname索引</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> last_name <span class="operator">=</span> <span class="string">&#x27;Smith&#x27;</span>;</span><br><span class="line"><span class="comment">-- 在这个查询中，由于last_name列上有索引，数据库可以快速定位到姓氏为&quot;Smith&quot;的记录，而不是扫描整个users表。</span></span><br><span class="line"><span class="comment">-- 2在连接条件中使用索引列	</span></span><br><span class="line"><span class="comment">-- 假设有两个表orders和users，其中orders表中的user_id列是用户的外键，并且在user_id列上创建了索引：</span></span><br><span class="line"><span class="keyword">CREATE</span> INDEX idx_orders_userid <span class="keyword">ON</span> orders(user_id);</span><br><span class="line"><span class="comment">-- CREATE INDEX idx_orders_userid ON orders(user_id);</span></span><br><span class="line"><span class="comment">-- 这条查询会利用idx_orders_userid索引</span></span><br><span class="line"><span class="keyword">SELECT</span> u.<span class="operator">*</span>, o.<span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> users u </span><br><span class="line"><span class="keyword">JOIN</span> orders o <span class="keyword">ON</span> u.id <span class="operator">=</span> o.user_id;</span><br><span class="line"><span class="comment">--在这个查询中，连接条件u.id = o.user_id中的user_id列上有索引，数据库可以利用该索引快速找到对应的用户记录，从而提高连接操作的性能。</span></span><br></pre></td></tr></table></figure>
+
+<p>2）避免过多索引：虽然索引可以加快查询速度，但也会增加插入、更新和删除操作的成本。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.每次对表进行以上操作时相关索引都需要同步更新，增加额外开销，2.索引需要在磁盘上占更多空间，增加磁盘使用量，3.过多的索引使得数据库的维护变得更加复杂，增加管理难度，4.数据库查询优化器在进行决策时过多的索引会浪费更多的时间决策，以及可能会选择次优的索引，影响查询效率。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3）选择合适的索引类型：如B-tree索引、哈希索引、全文索引等、根据具体查询需求选择合适的索引类型</p>
+<h5 id="2-查询优化"><a href="#2-查询优化" class="headerlink" title="2.查询优化"></a>2.查询优化</h5><p> 1）使用执行计划EXPLAN分析查询：使用explan分析查询计划</p>
+<p> 2）避免全表扫描：尽量使用索引来避免全表扫描</p>
+<ol start="3">
+<li>减少查询的复杂性：分解复杂查询，将其分解为多个简单查询</li>
+</ol>
+<p>	</p>
+<p> 4）选择性的使用子查询和联接：在某些情况下，子查询可以转换为联结查询，或者联结查询转换为子查询</p>
+<p>  1、子查询转换为联接 </p>
+<p>假设有两个表：<code>employees</code> 和 <code>departments</code>。<code>employees</code> 表存储员工信息，<code>departments</code> 表存储部门信息。我们希望找到所有在”Sales”部门工作的员工。 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 子查询方式</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> employees </span><br><span class="line"><span class="keyword">WHERE</span> department_id <span class="operator">=</span> (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> departments <span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;Sales&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在这个查询中，子查询会首先查找部门名称为”Sales”的部门ID，然后外层查询会使用这个ID查找员工。这种方式可能会比较慢，因为需要执行两个查询。 </p>
+<p>我们可以将这个子查询转换为联接： </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 联接方式</span></span><br><span class="line"><span class="keyword">SELECT</span> e.<span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">JOIN</span> departments d <span class="keyword">ON</span> e.department_id <span class="operator">=</span> d.id</span><br><span class="line"><span class="keyword">WHERE</span> d.name <span class="operator">=</span> <span class="string">&#x27;Sales&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>使用联接后，数据库可以同时处理两个表的连接，并且通常会更高效，特别是当适当的索引存在时。 </p>
+<p>2、联接转换为子查询 </p>
+<p>假设我们有一个查询，想找到那些没有在任何订单中出现过的客户。这里有两个表：<code>customers</code> 和 <code>orders</code>。 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 联接方式</span></span><br><span class="line"><span class="keyword">SELECT</span> c.<span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> customers c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders o <span class="keyword">ON</span> c.id <span class="operator">=</span> o.customer_id</span><br><span class="line"><span class="keyword">WHERE</span> o.id <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在这个查询中，我们使用了左联接来查找没有订单的客户。但如果<code>orders</code>表非常大，联接操作可能会非常耗时 。</p>
+<p>我们可以将其转换为子查询： </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 子查询方式</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> customers </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> customer_id <span class="keyword">FROM</span> orders);</span><br></pre></td></tr></table></figure>
+
+<p>这个查询首先执行子查询，找出所有有订单的客户ID，然后在外层查询中过滤掉这些客户。对于某些数据库引擎和数据分布，这种方式可能会更快。 </p>
+<ol start="3">
+<li>选择性使用子查询和联接的考虑因素<br>  性能影响<br>  索引：联接操作可以更好地利用索引，尤其是在连接条件上有适当的索引时。<br>  结果集大小：如果子查询返回的结果集较小，将子查询转换为联接可能会更高效。<br>  数据库优化器：不同数据库的查询优化器对于联接和子查询的处理方式不同，有时需要具体测试以确定哪种方式性能更好。</li>
+<li></li>
+</ol>
+<h4 id="性能影响"><a href="#性能影响" class="headerlink" title="性能影响"></a>性能影响</h4><ul>
+<li><strong>索引</strong>：联接操作可以更好地利用索引，尤其是在连接条件上有适当的索引时。</li>
+<li><strong>结果集大小</strong>：如果子查询返回的结果集较小，将子查询转换为联接可能会更高效。</li>
+<li><strong>数据库优化器</strong>：不同数据库的查询优化器对于联接和子查询的处理方式不同，有时需要具体测试以确定哪种方式性能更好。</li>
+</ul>
+<h5 id="3-表结构优化"><a href="#3-表结构优化" class="headerlink" title="3.表结构优化"></a>3.表结构优化</h5><p>1）表规范化和反规范化：根据实际情况适当的选择规范化和反规范化，减少数据冗余和查询复杂度</p>
+<p>2）数据分区：将大型表进行分区，提高查询性能和管理效率</p>
+<p>3）数据压缩：对历史数据进行压缩存储，以减少存储空间和I&#x2F;O开销</p>
+<h5 id="4-硬件和配置优化"><a href="#4-硬件和配置优化" class="headerlink" title="4.硬件和配置优化"></a>4.硬件和配置优化</h5><p>1)适当配置数据库参数：调整缓存池大小、连接池大小、缓存设置等数据库配置信息参数</p>
+<p>2）增加硬件资源：在必要时增加更多的CPU、内存和磁盘I&#x2F;O能力</p>
+<h5 id="5-SQL编写最佳实践"><a href="#5-SQL编写最佳实践" class="headerlink" title="5.SQL编写最佳实践"></a>5.SQL编写最佳实践</h5><p>1）避免使用<code>select *</code>: 只查询所需要的列，减少数据传输量</p>
+<p>2）使用绑定变量：防止SQL注入，提高查询性能</p>
+<p>3）合理使用<code>join</code>：避免使用过多的<code>JOIN</code>，尤其是<code>cross join</code></p>
+<p>4）使用批量操作：对于批量插入、更新和删除操作，尽量使用批量操作以减少开销。</p>
+<p>5）避免不必要的排序和分组：如非必须，不要使用<code>order by</code> 、  <code>group by</code>  和 <code>distinct</code></p>
+<p>6）使用合适的连接顺序：优化连接顺序，使得结果集比较小的表先参与连接。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mytortoisegit.github.io">陈先生</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mytortoisegit.github.io/2024/06/11/sql%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/">https://mytortoisegit.github.io/2024/06/11/sql%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mytortoisegit.github.io" target="_blank">小小的过客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/sql%E4%BC%98%E5%8C%96/">sql优化</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/11/redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" title="redis基本命令笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">redis基本命令笔记</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/07/%E6%90%AD%E5%BB%BAHexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="搭建Hexo`个人博客`"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">搭建Hexo`个人博客`</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">陈先生</div><div class="author-info__description">个人博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">1.索引优化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">2.查询优化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%BD%B1%E5%93%8D"><span class="toc-number"></span> <span class="toc-text">性能影响</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%A1%A8%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">3.表结构优化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%A1%AC%E4%BB%B6%E5%92%8C%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">4.硬件和配置优化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-SQL%E7%BC%96%E5%86%99%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">3.</span> <span class="toc-text">5.SQL编写最佳实践</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/11/redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" title="redis基本命令笔记">redis基本命令笔记</a><time datetime="2024-06-11T10:01:06.000Z" title="发表于 2024-06-11 18:01:06">2024-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/11/sql%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/" title="sql优化笔记">sql优化笔记</a><time datetime="2024-06-11T04:26:36.000Z" title="发表于 2024-06-11 12:26:36">2024-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/%E6%90%AD%E5%BB%BAHexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="搭建Hexo`个人博客`">搭建Hexo`个人博客`</a><time datetime="2024-06-07T08:34:41.000Z" title="发表于 2024-06-07 16:34:41">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/My-New-Post/" title="My New Post">My New Post</a><time datetime="2024-06-07T07:59:48.000Z" title="发表于 2024-06-07 15:59:48">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/hello-world/" title="Hello World">Hello World</a><time datetime="2024-06-07T05:21:53.929Z" title="发表于 2024-06-07 13:21:53">2024-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 陈先生</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.14.0-b3"></script><script src="/js/main.js?v=4.14.0-b3"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = (ele) => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from(ele).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+    
+    codeMermaidEle.forEach(ele => {
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.innerHTML = `<pre class="mermaid-src" hidden>${ele.textContent}</pre>`
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+  
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
