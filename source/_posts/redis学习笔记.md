@@ -36,7 +36,7 @@ key   ------value ---------------string
 
 ​			  -------------------sorted sets 
 
-<img src="1718595404719.png" alt="数据类型" />
+<img src="/images/1718595404719.png" alt="数据类型" />
 
 
 
@@ -186,7 +186,7 @@ key   ------value ---------------string
 
 微博微关系，共同关注，我关注的人他也关注XXX
 
-<img src="1718608742246.png" alt="数据类型" />
+<img src="/images/1718608742246.png" alt="数据类型" />
 
 
 
@@ -196,7 +196,7 @@ key   ------value ---------------string
 
 常用于排行榜，点赞数
 
-<img src="1718609100837.png" alt="作业" />
+<img src="/images/1718609100837.png" alt="作业" />
 
 
 
@@ -206,7 +206,7 @@ key   ------value ---------------string
 
 订单操作练习：
 
-<img src="1718348937509.png" alt="作业" /> 
+<img src="/images/1718348937509.png" alt="作业" /> 
 
 缓存雪崩：当redis中某一key缓存失效了，大量的访问同时请求这个key时，都去访问数据库导致数据库挂掉
 
@@ -220,13 +220,13 @@ AOF持久化，保存的是所有执行命令.
 
 ### redis重启时加载AOF与RDB的顺序：
 
-<img src="1718592500425.png" alt="加载" />
+<img src="/images/1718592500425.png" alt="加载" />
 
 
 
 ### redis性能测试
 
-<img src="1718677261520.png" alt="加载" />
+<img src="/images/1718677261520.png" alt="加载" />
 
 ```
 100个并发连接 100000个请求  检测服务器性能
@@ -241,7 +241,7 @@ redis-benchmark -h 192.168.42.111 -p 6379 -a 9451a -n 100000 -q script load "red
 
 ### reids事务
 
-<img src="1718679916072.png" alt="加载" />
+<img src="/images/1718679916072.png" alt="加载" />
 
 ### redis高可用
 
