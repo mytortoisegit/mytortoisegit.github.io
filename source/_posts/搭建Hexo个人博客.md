@@ -150,7 +150,7 @@ git clone https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
    # 提交更改到 GitHub
    git add .
    git commit -m "提交说明"
-   
+   git commit -m "add"
    git push origin master
    或者
    git push origin main
