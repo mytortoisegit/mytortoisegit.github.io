@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>面试笔记 | 小小的过客</title><meta name="author" content="陈先生"><meta name="copyright" content="陈先生"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="你好，我是， 老家在内蒙古呼和浩特的，大学毕业后就开始从事java相关开发，熟悉Java相关技术以及常见的各种框架，同时可以熟练的运用，也熟悉各种数据库以及消息中间件，可以熟练的使用各种开发工具以及项目管理工具，上家公司是在通用技术控股有限公司做后端开发，项目是一个互联网+健康医疗系统，包括智慧就医、在线问诊、健康管理、专科服务、健康商城等功能，涉及到4个web端、2个移动端、公众号、小程序等。我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试笔记">
+<meta property="og:url" content="https://mytortoisegit.github.io/2024/07/01/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="小小的过客">
+<meta property="og:description" content="你好，我是， 老家在内蒙古呼和浩特的，大学毕业后就开始从事java相关开发，熟悉Java相关技术以及常见的各种框架，同时可以熟练的运用，也熟悉各种数据库以及消息中间件，可以熟练的使用各种开发工具以及项目管理工具，上家公司是在通用技术控股有限公司做后端开发，项目是一个互联网+健康医疗系统，包括智慧就医、在线问诊、健康管理、专科服务、健康商城等功能，涉及到4个web端、2个移动端、公众号、小程序等。我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-07-01T14:24:33.000Z">
+<meta property="article:modified_time" content="2024-07-01T14:29:19.824Z">
+<meta property="article:author" content="陈先生">
+<meta property="article:tag" content="面试 记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mytortoisegit.github.io/2024/07/01/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.14.0-b3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = false
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '面试笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-01 22:29:19'
+}</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="小小的过客"><span class="site-name">小小的过客</span></a></span><div id="menus"><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">面试笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-01T14:24:33.000Z" title="发表于 2024-07-01 22:24:33">2024-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-01T14:29:19.824Z" title="更新于 2024-07-01 22:29:19">2024-07-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="面试笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>你好，我是， 老家在内蒙古呼和浩特的，大学毕业后就开始从事java相关开发，熟悉Java相关技术以及常见的各种框架，<br>同时可以熟练的运用，也熟悉各种数据库以及消息中间件，可以熟练的使用各种开发工具以及项目管理工具，上家公司是在通用技术控股有限公司做后端开发，<br>项目是一个互联网+健康医疗系统，包括智慧就医、在线问诊、健康管理、专科服务、健康商城等功能，涉及到4个web端、2个移动端、公众号、小程序等。<br>我在项目中主要负责根据产品提出的需求，分析并编写技术文档，同时完成相应功能的实现和测试，以及线上紧急问题的修复处理。</p>
+<p>面试官：我这边没什么问题了你有什么问题要问我？ 业务线</p>
+<p>面试要点：1、你们项目是单体架构吗 不是，我们是分布式架构，不同模块使用dubbo调用		</p>
+<p>RabbitMQ：<br>    1、基于AMQP应用协议（高级消息队列协议），用于在分布式系统中异步传输消息。<br>    2、用于解耦、异步处理、流量削峰、数据同步<br>    3、主要包括生产者、消费者、交换机（Exchange）、队列（Queue）等核心概念。<br>    4、支持多种消息传递模型点对点   &#x2F;发布&#x2F;订阅等，<br>    5、交换机类型direct(点对点), fanout(发布&#x2F;订阅), topic, headers<br>    6、生产者发送消息到交换机，交换机通过配置路由信息，将消息投递到对应的队列中，消费者绑定队列，从队列中消费消息。<br>    7、可以通过设置队列和消息的持久化属性来保证消息在 RabbitMQ 重启后不丢失<br>    8、如何确保消息被正常消费：消费者消息确认机制自动确认和手动确认，自动确认是消费接收到消息后，mq会认为已经消费了，删除队列中对应消息，消费过程中异常，消息丢失<br>                                                                     手动确认是消息处理完，必须显式的发送一个确认给mq,收到ack后才删除消息，如果没收到，会重新加入队列																 或者放入死信队列，以此确保消息被消费一次<br>    9、死信队列用于存储无法被正常消费的队列，消息被拒绝、队列达到最大长度、队列中超时，</p>
+<p>消息确认机制：自动ACK 消费者接收到消息后，消息立即从队列删除，不适用需要确保消息被成功消费的场景<br>              手动ACK 消费者在成功处理完消息后，显示发送ack,   适用于需要确保消息被成功处理的场景<br>             死信队列，消息失败次数过多时，进入死信队列，进行特殊处理。</p>
+<p>如何保证消息不丢失？1.消息持久化标记<br>                    2.绑定队列时，可标记为持久化队列<br>                    3.手动消息确认，确保消费者，正确处理消息后，才从对列删除。<br>                    4.生产者使用消息确认机制，确保消息成功到达服务器，如果未被确认，可以选择重发。</p>
+<p>消息队列如何保证幂等性：1. 唯一消息ID，每条消息都带自身业务的唯一ID，消费者检查此id是否被消费，已处理跳过，未处理则处理并标记<br>                        2. 操作本身是幂等操作，插入前检查数据是否已存在，更新使用唯一标识更新，删除检查是否存在再删除。<br>                        3. 事务和消息队列的结合，消息确认机制，当生产者生成消息后，被消费者成功消费后返回给生成者消费成功标识，<br>                        4. 在数据库中使用唯一约束，避免重复插入数据。</p>
+<p>消息队列如何保证顺序消费：1.单一消费者，每个队列只有一个消费者。 缺点：处理能力有限<br>                          2.消费者并发控制，使用消费者窗口机制，确保每个消费者处理完当前消息之前不会收到新消息channel.basicQos(1);<br>                          3.消息确认机制，确保每条消息在成功处理后才进行下一条消息的处理。</p>
+<p>Direct Exchange：适用于点对点精确匹配的场景，如任务调度、不同级别的日志处理。<br>Fanout Exchange：适用于广播消息的场景，如通知、事件更新、多服务同步。<br>Topic Exchange：适用于模糊匹配的场景，如日志聚合、事件驱动架构。<br>Headers Exchange：适用于复杂路由需求的场景，如企业消息总线。	<br>         		<br>Spring MVC 主要用于构建 Web 应用，专注于请求处理和视图渲染。适合于需要精细控制配置和组件的应用。</p>
+<p>Spring Boot  用于简化 Spring 应用的开发过程。它集成了 Spring MVC，并提供了自动配置、内嵌服务器等特性，极大地提高了开发效率。	</p>
+<p>dubbo是高性能的 RPC （远程过程调用）框架，广泛应用于构建微服务、分布式服务架构中</p>
+<p>mysql数据库：<br>            慢sql优化<br>                    1.配置数据库启用慢查询日志<br>                    2.找到查询慢的sql语句，使用EXPLAIN分析慢的原有以及索引使用情况。<br>                    3.使用索引提高查询效率 使用索引，或者使用联合索引提高查询效率。<br>                    4.优化sql语句，1）避免使用select * 返回过多无用数据<br>                                   2）优化where子句，使用索引，避免全表扫描<br>                                    3）避免使用 like %d%<br>                    5.选择性的使用子查询和联接<br>执行引擎：<br>        InnoDB：事务支持、行级锁定、外键支持、崩溃恢复，适用场景：适合需要事务支持、并发高、数据完整性要求较高的应用<br>        MyISAM: 全文索引、表级锁定、不支持事务，适用场景：适合读密集的应用，如日志分析系统、数据仓库等 </p>
+<p>数据库处理并发事务时出现常见问题，脏读（读到未提交数据）、不可重复度（2次读取到数据不一致）、幻读 （一个事务俩次查询间，另一个事务插入或者删除了数据）</p>
+<p>为解决并发问题：四种隔离级别，读未提交，读已提交，可重复读，可序列化<br>        默认： Oracle：读已提交   MySQL：可重复读</p>
+<p>​				<br>事务处理的基本属性 ACID: 原子性、一致性、隔离性、持久性			</p>
+<p>线程池的三大参数：核心线程数，最大线程数，任务队列</p>
+<p>分布式锁：保证在多个节点同时访问时，只有一个节点能够获取锁并执行临界区代码，从而避免并发冲突。<br>        实现方式：基于redis</p>
+<p><strong>分布式事务：</strong></p>
+<p>在多个不同的数据库或服务中执行的一系列操作，这些操作作为一个整体被提交或回滚，以保证数据的一致性和完整性。要么全部成功，要么全部失败<br>    比如一个订单，要执行库存更新和订单创建，支付与订单状态更新，订单中涉及到积分或优惠券使用，</p>
+<p><strong>解决方式</strong>：在强一致性的要求场景下，可以使用2PC或3PC，			  在性能和灵活性要求高的场景下，可以使用选择TCC、SAGA或基于消息的事务（消息确认机制，消费者成功后返回给生产者）。		</p>
+<p>​				<br><strong>redis:   String  hash    list  set  zset</strong><br>    常用的场景：1、缓存，目的减少数据库的查询压力，提高响应速度。<br>                2、会话存储， 目的存储用户会话信息。<br>                3、队列   目的任务队列、消息队列   lpush rpop<br>                4、排行榜&#x2F;计数器 目的实时计算和排序。<br>                5、分布式锁  目的 在分布式系统中实现锁机制，避免资源竞争。</p>
+<p>雪崩：大量的key同时过期，导致数据库访问激增甚至崩溃<br>    解决：1.缓存时间随机化：在设置缓存失效时间时，为每个时间加一个随机时间偏移，可以随机增加0-600秒<br>          2.不设置过期时间，定期更新缓存，<br>          3.缓存预热，定时将热点数据加载到缓存中，<br>          4.使用锁机制，通过分布式锁来控制对数据库访问，只有获取到锁的请求可以访问，同时设置缓存。<br>穿透：缓存中没有数据，数据库也没有，不停的访问相同key</p>
+<p>​	解决：查询数据库没有，设置null到缓存中。</p>
+<p>​				<br>数据一致性：1.双写一致性控制，先写数据库，成功后更新缓存。先写缓存成功后再更新数据库，同时设置缓存过期时间，<br>            2.消息队列，当数据发生变化时，将数据发生到消息队列，由消费者异步处理缓存和数据库的更新。</p>
+<p>多线程竞争的时候，				<br>轻量级锁  通过程序自旋实现cas</p>
+<p>重量级锁  操作系统层面处理</p>
+<p>偏向锁，默认锁给某一线程， 通过标签的形式实现<br>        当出现锁竞争的时候升级为 轻量级锁 升级到重量级锁</p>
+<p>Spring Cloud组件系列		<br>    Eureka：服务发现和注册中心<br>    Ribbon：客户端负载均衡器<br>    Feign：声明式 HTTP 客户端<br>    Hystrix：熔断器<br>    Zuul：API 网关</p>
+<p>spring   springmvc   mybatis   hibernate  struts  springboot  springcloud   mysql<br>oracle  mongodb  redis  RabbitMQ  dubbo  zookeeper  linux  docker </p>
+<p>一个表student表  id 、  性别 、  分数字段，要求分别统计出数分数大于90分的男女人数</p>
+<p>SELECT  gender,  COUNT(*) AS count  FROM  student  WHERE   score &gt; 90   GROUP BY   gender;</p>
+<p>Java集合框架 Collection、List、Set、Queue、Map<br>            List:有序可重复<br>                ArrayList底层基于动态数组（默认10，扩容1.5倍），随机访问快，增删元素慢，<br>                LinkedList基于双向链表，增删元素快，随机访问慢<br>            Set：无序不可重复<br>                HashSet基于hashmap实现，<br>                LinkedHashSet 维护了一个双向链表来保持插入顺序<br>                TreeSet基于红黑树（一种自平衡二叉查找树）实现<br>            Map:<br>                hashmap: 基于数组和 链表（链表长度8转红黑树，长度变成6时转链表）实现的哈希表，使用hashcode值对16取模计算位置，使用链表或红黑树 解决哈希冲突的方法<br>                        默认长度是16，扩容因子默认为 0.75，当元素超过 初始值*扩容因子时，触发扩容，扩容数组增大一倍，重新计算数组中元素位置。<br>                        允许键和值都为null,<br>                        线程不安全<br>                LinkedHashMap： 通过双向链表维护插入顺序或访问顺序<br>                ConcurrentHashMap：线程安全，使用了分段所，每一段相当于一个hashmap。			</p>
+<p>数据库模型：关系型MySQL、PostgreSQL、Oracle、 SQL Server ，键值对key-value Redis,<br>            文档型MongoDB，图型，列存储型，</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mytortoisegit.github.io">陈先生</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mytortoisegit.github.io/2024/07/01/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">https://mytortoisegit.github.io/2024/07/01/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mytortoisegit.github.io" target="_blank">小小的过客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95-%E8%AE%B0%E5%BD%95/">面试 记录</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/07/01/jvm/" title="jvm"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">jvm</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">陈先生</div><div class="author-info__description">个人博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/01/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/" title="面试笔记">面试笔记</a><time datetime="2024-07-01T14:24:33.000Z" title="发表于 2024-07-01 22:24:33">2024-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/01/jvm/" title="jvm">jvm</a><time datetime="2024-07-01T01:03:39.000Z" title="发表于 2024-07-01 09:03:39">2024-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/25/%E5%A4%96%E5%8D%96%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/" title="外卖项目介绍">外卖项目介绍</a><time datetime="2024-06-25T07:20:58.000Z" title="发表于 2024-06-25 15:20:58">2024-06-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/25/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" title="软件开发流程">软件开发流程</a><time datetime="2024-06-25T07:03:52.000Z" title="发表于 2024-06-25 15:03:52">2024-06-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/25/springmvc%E7%AC%94%E8%AE%B0/" title="springmvc笔记">springmvc笔记</a><time datetime="2024-06-25T01:50:26.000Z" title="发表于 2024-06-25 09:50:26">2024-06-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 陈先生</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.14.0-b3"></script><script src="/js/main.js?v=4.14.0-b3"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const runMermaid = (ele) => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from(ele).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+    
+    codeMermaidEle.forEach(ele => {
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.innerHTML = `<pre class="mermaid-src" hidden>${ele.textContent}</pre>`
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+  
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
