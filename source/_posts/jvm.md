@@ -32,7 +32,9 @@ tags: jvm
 
 #### 线程私有区域
 
-**程序计数器**：指向 当前线程正在执行的字节码指令的地址（行号），唯一不会oom的区域。
+##### **程序计数器**：
+
+指向 当前线程正在执行的字节码指令的地址（行号），唯一不会oom的区域。
 
 ​		为什么要有程序计数器？
 
@@ -50,7 +52,9 @@ tags: jvm
 
 ​		非常好的兼容 方法中调用方法
 
-**虚拟机栈**：	-Xss 1M   除windows其他系统默认设置大小
+##### **虚拟机栈**：	
+
+-Xss 1M   除windows其他系统默认设置大小
 
 ​		1.  存储<font color="red">当前线程</font> 运行方法所需的数据，参数，局部变量，返回地址等。
 
@@ -114,7 +118,9 @@ tags: jvm
 
 
 
-**本地方法栈**：保存的是当前线程的native方法的信息，调用非java方法时，使用的内存空间
+##### **本地方法栈**：
+
+保存的是当前线程的native方法的信息，调用非java方法时，使用的内存空间
 
 
 
@@ -302,9 +308,11 @@ public class Demo1_20 {
 
 对象头存储：hashcode值，GC垃圾回收（年龄），锁状态标志，线程持有的锁，偏向线程id,偏向时间戳等等。
 
-#### <img src="/images/1719817196796.png" alt="数据类型" />对象的访问方式
+<img src="/images/1719817196796.png" alt="数据类型" />
 
-<img src="/images/1719817531364.png" alt="数据类型" />
+对象的访问方式
+
+
 
 
 
@@ -459,7 +467,7 @@ Java中大部分对象98%是不需要回收的，因为是朝生夕死。新生�
   8. GC详情： -XX:+PrintGCDetails -verbose:gc
   9. FullGC前MinorGC: -XX:+ScavengeBeforeFullGC
 
-​	
+		
 
 
 
@@ -582,7 +590,7 @@ Java中大部分对象98%是不需要回收的，因为是朝生夕死。新生�
 
 <img src="/images/1720168443901.png" alt="数据类型" />
 
-1.   调优领域
+1. 调优领域
 
    - 内存
    - 锁竞争
@@ -647,9 +655,9 @@ Java中大部分对象98%是不需要回收的，因为是朝生夕死。新生�
 
        
 
-​	**所有新生代的算法都是复制算法**
+**所有新生代的算法都是复制算法**
 
-​	**在老年代中 CMS收集器使用标记-清除算法**
+**在老年代中 CMS收集器使用标记-清除算法**
 
 <img src="/images/1720001071888.png" alt="数据类型" />
 
@@ -676,6 +684,411 @@ G1垃圾回收器
 stop the world现象
 
 ​		<img src="/images/1720014966667.png" alt="数据类型" />
+
+#### 6.图解方法执行流程
+
+​	<img src="/images/1720232352686.png" alt="数据类型"/>
+
+​	<img src="/images/1720232415856.png" alt="数据类型"/>   <img src="/images/1720232440574.png" alt="数据类型"/>
+
+​	<img src="/images/1720232598941.png" alt="数据类型"/> 
+
+<img src="/images/1720232818742.png" alt="数据类型"/>
+
+<img src="/images/1720232818742.png" alt="数据类型"/>
+
+
+
+<img src="/images/1720232818742.png" alt="数据类型"/>
+
+执行引擎开始执行字节码
+
+<img src="/images/1720232952420.png" alt="数据类型"/>
+
+赋值操作
+
+<img src="/images/1720233108903.png" alt="数据类型"/>
+
+<img src="/images/1720233175402.png" alt="数据类型"/>
+
+下一行操作idc#
+
+读取运行时常量池中32768到操作数栈中
+
+<img src="/images/1720233225764.png" alt="数据类型"/>
+
+
+
+将结果赋值给b=32768
+
+<img src="/images/1720233294380.png" alt="数据类型"/>
+
+执行a+b 操作前，先将槽位中a、b读到操作数栈
+
+读取a
+
+<img src="/images/1720233557191.png" alt="数据类型"/>
+
+读取b
+
+<img src="/images/1720233595716.png" alt="数据类型"/>
+
+执行加法iadd
+
+<img src="/images/1720234158040.png" alt="数据类型"/>
+
+<img src="/images/1720234187035.png" alt="数据类型"/>
+
+
+
+给c赋值操作
+
+<img src="/images/1720234232138.png" alt="数据类型"/>
+
+结果
+
+<img src="/images/1720234282960.png" alt="数据类型"/>
+
+执行放入操作数栈
+
+<img src="/images/1720234332932.png" alt="数据类型"/>
+
+<img src="/images/1720234439494.png" alt="数据类型"/>
+
+读取被打印数据
+
+<img src="/images/1720234520464.png" alt="数据类型"/>
+
+<img src="/images/1720234930733.png" alt="数据类型"/>
+
+执行打印方法，创建新栈帧
+
+<img src="/images/1720235008763.png" alt="数据类型"/>
+
+执行结束弹出
+
+<img src="/images/1720235835839.png" alt="数据类型"/>
+
+
+
+## 编译期处理（编译器语法糖）
+
+- 默认构造参数
+
+- 自动拆装箱
+
+  ​	Integer   int
+
+- 泛型集合取值
+
+  <img src="/images/1720264027612.png" alt="数据类型"/>
+
+  
+
+- 可变参数
+
+- foreach循环
+
+  ```java
+  // 语法糖
+  public static void main(String[] args) {
+          int [] arr={1,2,3,4,5};
+          for (int i : arr) {
+              System.out.println(i);
+          }
+      }
+  //编译器
+  public static void main(String[] args){
+          int [] arr=new int[]{1,2,3,4,5};
+          for (int i = 0; i < arr.length; i++) {
+              int  temp=arr[i];
+              System.out.println(temp);
+          }        
+   }
+  ```
+
+- switch字符串
+
+- switch枚举
+
+- 枚举类
+
+- try-with-resources
+
+- 方法重写时的桥接方式
+
+- 匿名内部类
+
+  
+
+## 类加载阶段
+
+### 加载
+
+- 将类的字节码载入到方法区中(1.8元空间)，内部采用C++的instanceKlass描述java类，它的重要field有:
+  - _java_mirror 即 java 的类镜像，例如对 string来说，就是 String.class，作用是把 klass 暴露给java 使用
+  - _super 即父类
+  - _fields 即成员变量
+  - _methods 即方法
+  - _constants 即常量池
+  - _class_loader 即类加载器
+  - _vtable 虚方法表
+  - _itable 接口方法表
+
+- 如果这个类还有父类没有加载，先加载父类
+- 加载和链接可能是交替运行的
+
+### 链接
+
+- 验证：验证字节码是否符合jvm规范以及安全检查
+- 准备：为 static 变量分配空间，设置默认值
+  - static 变量在 JDK7之前存储于 instanceKlass 末尾，从 JDK7开始，存储于 java mirror 末尾，堆中；
+  - static 变量分配空间和赋值是两个步骤，分配空间在准备阶段完成，赋值在初始化阶段完成
+  - 如果 static 变量是 final的基本类型，那么编译阶段值就确定了，赋值在准备阶段完成；
+  - 如果 static 变量是 final的，但属于引用类型，那么赋值也会在初始化阶段完成；
+- 解析：将常量池中的符号引用解析为直接引用
+
+### 初始化:   
+
+执行类的构造方法，初始化即调用 <cinit>()v 方法，虚拟机会保证这个类的构造方法线程安全
+
+- 发生时机：概括的说类的初始化是懒惰的，
+  1. main 方法所在的类，总会被首先初始化
+  2. 首次访问这个类的静态变量或静态方法时
+  3. 子类初始化，如果父类还没初始化，会引发
+  4. 子类访问父类的静态变量，只会触发父类的初始化
+  5. Class.forName
+  6. new 会导致初始化
+
+- 不会导致类初始化的情况
+  1. 访问类的 static final静态常量(基本类型和字符串)不会触发初始化
+  2. 类对象.class 不会触发初始化
+  3. 创建该类的数组不会触发初始化
+  4. 类加载器的 loadClass 方法
+  5. Class.forName的参数2为false 时
+
+## 类加载器
+
+### 启动类加载器 Bootstrap ClassLoader
+
+​	加载类路径：JAVA_HOME/jre/lib
+
+### 扩展类加载器 Extension ClassLoader
+
+​	加载类路径：JAVA_HOME/jre/lib/ext
+
+### 应用程序类加载器 Application ClassLoader
+
+​	加载类路径：classpath
+
+### 自定义类加载器
+
+​	加载类路径：自定义
+
+### 双亲委派模式
+
+​	类加载时，首先要找父类加载器加载，如果父类加载器没有加载，当前类加载器才加载，保证类只加载一次，避免重复加载。
+
+## 内存模型
+
+### java内存模型
+
+【java 内存模型】是 Java MemoryModel(JMM)的意思。
+
+定义了Java程序中  线程如何与内存进行交互的规则和规范。它规定了**线程之间共享变量的访问方式、操作的可见性以及指令重排序**的规则。 
+
+### 原子性	
+
+- 问题：俩个线程同时操作一个静态变量
+- 解决方法  synchroized 对象
+
+```java
+synchroized (Object obj){
+    
+}
+```
+
+### 可见性
+
+​	它保证的是在多个线程之间，一个线程对 volatile 变量的修改对另一个线程可见，不能保证原子性。
+
+​	Java中的`volatile`关键字可以保证变量的可见性，即一个线程对`volatile`变量的修改会立即刷新到主					 内存中，其他线程读取时会从主内存中获取最新值。 
+
+- 解决办法：volatile(易变关键字)
+
+  它可以用来修饰成员变量和静态成员变量，他可以**避免线程从自己的工作缓存中查找变量的值**，必须到主存中获取它的值，线程操作 volatile 变量都是直接操作主存
+
+### 有序性（Ordering）
+
+JMM允许编译器和处理器对指令进行重排序以优化性能 ，但必须保证单线程程序的执行结果不受影响。在多线程环境中，为了保证有序性， 可以使用`volatile`关键字、同步块或 JUC包
+
+<img src="/images/1720424554030.png" alt="数据类型"/>
+
+经典案例双重检查单例模式
+
+```java
+/**
+ * 双重检查单例
+ */
+public class DemoSingleton {
+    public DemoSingleton() {
+    }
+
+    private  static DemoSingleton INSTANCE = null;
+
+    public static DemoSingleton getInstance() {
+        // 实例没创建才进入 内部同步代码块
+        if (INSTANCE == null) {
+            synchronized (DemoSingleton.class) {
+                // 也行有其他线程创建过了，再次判断
+                if (INSTANCE == null) {
+                    INSTANCE = new DemoSingleton();
+                }
+            }
+
+        }
+        return INSTANCE;
+    }
+}
+```
+
+特点：懒惰实例化
+
+首次使用getInstance()才使用加锁，后续使用无需加锁，
+
+在多线程环境下存在问题，指令重排序问题，
+
+<img src="/images/1720426487023.png" alt="数据类型"/>
+
+![1720426487023](E:\博客系统\qianduan\my-blog-github\source\_posts\1720426487023.png)
+
+```java
+/**
+ * 双重检查单例
+ */
+public class DemoSingleton {
+    public DemoSingleton() {
+    }
+
+    private volatile static DemoSingleton INSTANCE = null;
+
+    public static DemoSingleton getInstance() {
+        // 实例没创建才进入 内部同步代码块
+        if (INSTANCE == null) {
+            synchronized (DemoSingleton.class) {
+                // 也行有其他线程创建过了，再次判断
+                if (INSTANCE == null) {
+                    INSTANCE = new DemoSingleton();
+                }
+            }
+
+        }
+        return INSTANCE;
+    }
+}
+```
+
+
+
+### CAS与原子类
+
+- CAS（Compare and Swap，比较并交换） 是一种用于实现并发编程的原子操作，它在现代处理器中被广泛使用，以确保多线程环境下的操作原子性 ，一种乐观锁的体现
+
+```java
+
+        while (true) {
+            int old=10;   // 拿到共享变量当前值 10
+            int new1=old + 1;  // 在旧值的基础上执行操作， 正确结果时11
+
+            /**
+             *  这个时候如果其他线程将共享变量修改成了5 本线程的正确结果11 就作废了
+             *  这个时候compareAndSwap返回结果就是false, 重新读取共享变量5 再进行操作
+             *
+             *  直到compareAndSwap返回结果是true   表示本线程修改其他线程未干扰
+             */
+            if(compareAndSwap(old,new1)){
+
+                //成功退出循环
+            }
+        }
+```
+
+获取共享变量时，为了保证该变量的可见性，需要使用 volatie 修饰。结合 CAS 和 volatile 可以实现无锁并发。
+
+- 乐观锁与悲观锁
+
+  1. CAS是基于乐观锁的思想：不怕别的线程来修改共享变量，就算修改，也可以通过重试再次修改好。
+  2. synchronized是基于悲观锁的思想：最悲观的估计，直接上锁，防止其他线程来修改共享变量。
+
+- 原子操作类
+
+   juc提供了原子操作类，可以提供线程安全的操作，如：AtomicInteger、AtomicBoolean等
+
+  底层采用的是CAS技术+volatile实现
+
+  
+
+### synchronized优化
+
+Java Hotspot 虚拟机中，每个对象都有对象头(包括 class 指针和 Mark word)。Mark word 平时存储这个对象的 哈希码、分代年龄，当加锁时，这些信息就根据情况被替换为 标记位、线程锁记录指针、重量级锁指针、线程ID 等内容。
+
+1. 轻量级锁
+
+   通常用于短时间的加锁操作，开销更小，更加高效。 
+
+   轻量级锁的实现方式有多种，常见的方法包括： 
+
+   - 自旋锁（Spin Lock）： 自旋锁是一种忙等待的锁机制，当一个线程尝试获取锁时，如果锁已经被占用，线程不会进入阻塞状态，而是持续检查锁是否可用。这种方式避免了线程的上下文切换开销，但在锁等待时间较长时可能会导致CPU资源浪费。 
+   - CAS操作（Compare-And-Swap）： CAS操作是一种原子操作，用于实现无锁编程。通过CAS操作，线程可以在不加锁的情况下实现对共享资源的同步。CAS操作通常由底层硬件支持，具有较高的效率。 
+   - 偏向锁（Biased Locking）：  偏向锁是一种优化技术，旨在减少无竞争情况下的锁开销。当只有一个线程访问锁时，锁进入偏向模式，线程可以直接访问锁而无需进行同步操作。如果有其他线程竞争锁，锁会撤销偏向模式并切换到其他锁机制。 
+
+2. 锁膨胀（锁升级）
+
+   - 在Java中，对象的锁机制可以从轻量级锁逐渐升级为重量级锁，这个过程被称为锁膨胀 。
+   - 锁的几种状态
+     1. 偏向锁 ：偏向锁是针对无竞争场景的一种优化。它在没有其他线程竞争时，偏向于第一个获得锁的线程，避免了频繁的CAS操作。 **适用场景：** 单线程多次访问同步块。 
+     2. 轻量级锁（Lightweight Locking）： 轻量级锁在存在少量竞争但竞争不激烈的情况下，通过自旋和CAS操作来避免重量级锁的高开销。 **适用场景：** 竞争少且锁持有时间短的场景。 
+     3. 重量级锁（Heavyweight Locking）： 重量级锁是在高竞争情况下使用的锁机制，会使线程进入阻塞状态，避免自旋消耗CPU。**适用场景：** 竞争激烈且锁持有时间较长的场景。 
+     4. 当一个线程持有偏向锁，而另一个线程尝试获取同一个锁时，偏向锁会撤销，并升级为轻量级锁； 偏向锁的撤销需要暂停持有偏向锁的线程，并将其转换为轻量级锁； 当轻量级锁的持有线程和等待线程都在短时间内无法获得锁时，轻量级锁会膨胀为重量级锁； 锁膨胀会导致线程进入阻塞状态，等待重量级锁的释放。 
+
+3. 重量级锁
+
+   - 用于处理高竞争情况下线程同步的锁机制。
+   -  重量级锁的特点
+     1. **阻塞和唤醒**：当一个线程无法获取锁时，会被挂起（阻塞），直到锁可用时再被唤醒。这个过程涉及线程上下文的切换，开销较大。
+     2. **监视器锁**：重量级锁使用操作系统提供的监视器（Monitor）机制实现，每个对象都有一个监视器，锁的获取和释放都是通过监视器实现的。
+     3. **锁的持有时间**：重量级锁适用于锁持有时间较长的场景，因为在这种情况下，阻塞和唤醒的开销相对自旋等待的开销较小。
+   - 重量级锁是通过对象头中的`mark word`（标记字段）来实现的。当一个对象被加锁时，其`mark word`中的状态位会被修改，指向一个重量级锁的监视器（Monitor）。 
+
+4. 偏向锁
+
+   - Java虚拟机（JVM）中用于优化无竞争场景下锁性能的一种机制。它的主要目标是减少在无竞争情况下的锁操作开销，使得加锁和解锁操作尽可能地廉价。偏向锁适用于单线程多次访问同步块的场景。 
+
+     
+
+5. 其他优化
+
+   - 锁粗化（Lock Coarsening） 
+   - 锁消除（Lock Elimination） 
+   - 自适应自旋（Adaptive Spinning） 
+   - 偏向锁延迟（Biased Locking Delay） 
+   -  线程本地分配缓冲区（Thread Local Allocation Buffer, TLAB） 
+   -  可重入锁（Reentrant Lock） 
+   -  读写锁（Read-Write Lock） 
+
+
+
+
+
+### 
+
+
+
+
+
+
+
+
 
 
 
